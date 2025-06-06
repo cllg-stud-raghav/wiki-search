@@ -1,9 +1,22 @@
-function SearchBar() {
-    const searchTerm="react";
-    const url = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${searchTerm}&format=json
-`
+import { useState } from "react";
+
+function SearchBar({onSearch}) {
+    const [searchTerm,setSearchTerm]=useState(' ');
+    const handleSubmit=(e)=>{
+        e.preventDefault();
+        onSearch(searchTerm);
+    }
     return (
-        <p>SearchBar</p>
+        <form onSubmit={handleSubmit}>
+            <input
+             type="text"
+             name="searchTerm"
+             value={searchTerm}
+             placeholder="e.g. Carryminati"
+             id="search-bar"
+             onChange={(e)=>{setSearchTerm(e.target.value)}}
+             />
+        </form>
     )
 }
 export default SearchBar;
